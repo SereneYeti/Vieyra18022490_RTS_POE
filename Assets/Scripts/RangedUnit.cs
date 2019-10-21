@@ -8,6 +8,80 @@ namespace Assets.Scripts
 {
     class RangedUnit : Unit
     {
+        public string Name
+        {
+            get { return base.name; }
+            set { base.name = value; }
+        }
+        public int XPos
+        {
+            get { return base.xPos; }
+            set { base.xPos = value; }
+        }
+        public int YPos
+        {
+            get { return base.yPos; }
+            set { base.yPos = value; }
+        }
+        public int Health
+        {
+            get { return base.health; }
+            set { base.health = value; }
+        }
+        public int MaxHealth
+        {
+            get { return base.maxHealth; }
+        }
+        public int Attack
+        {
+            get { return base.attack; }
+            set { base.attack = value; }
+        }
+
+        public int AttackRange
+        {
+            get { return base.attackRange; }
+            set { base.attackRange = value; }
+        }
+        public int Speed
+        {
+            get { return base.speed; }
+            set { base.speed = value; }
+        }
+        public int Faction
+        {
+            get { return base.faction; }
+        }
+        //public string Symbol
+        //{  Not Used at the moment
+        //    get { return base.symbol; }
+        //    set { base.symbol = value; }
+        //}
+        public bool IsAttacking
+        {
+            get { return base.isAttacking; }
+            set { base.isAttacking = value; }
+        }
+        public bool IsDead
+        {
+            get { return base.isDead; }
+            set { base.isDead = value; }
+        }
+        public RangedUnit(int x, int y, string _name, int _health, int _attack, int _attackRange, int _speed, int _faction)
+        {
+            XPos = x;
+            YPos = y;
+            Name = _name;
+            Health = _health;
+            base.maxHealth = _health;
+            Attack = _attack;
+            AttackRange = _attackRange;
+            Speed = _speed;
+            base.faction = _faction;
+            IsAttacking = false;
+            IsDead = false;
+
+        }
         public override (Unit, int) Closest(List<Unit> units)
         {
             throw new NotImplementedException();
@@ -20,7 +94,9 @@ namespace Assets.Scripts
 
         public override void Death()
         {
-            throw new NotImplementedException();
+            IsDead = true;
+            Health = 0;
+            IsAttacking = false;
         }
 
         public override bool InRange(Unit other)

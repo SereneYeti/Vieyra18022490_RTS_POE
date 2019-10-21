@@ -93,7 +93,9 @@ namespace Assets.Scripts
 
         public override void Death()
         {
-            throw new NotImplementedException();            
+            IsDead = true;
+            Health = 0;
+            IsAttacking = false;
         }
 
         public override bool InRange(Unit other)
