@@ -12,12 +12,12 @@ namespace Assets.Scripts
         //Abstract class with no code implemented 
         //Used for the sake of re-use and inheritance        
         protected Vector3 position;
-        protected int health;
-        protected int maxHealth;
-        protected int speed;
-        protected int attack;
-        protected int attackRange;
-        protected int faction;
+        protected float health;
+        protected float maxHealth;
+        protected float speed;
+        protected float attack;
+        protected float attackRange;
+        protected float faction;
         //protected string symbol;
         protected string name;
         protected bool isAttacking;

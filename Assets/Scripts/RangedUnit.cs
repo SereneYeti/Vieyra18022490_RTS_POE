@@ -21,32 +21,32 @@ namespace Assets.Scripts
             set { base.position = value; }
         }
         
-        public int Health
+        public float Health
         {
             get { return base.health; }
             set { base.health = value; }
         }
-        public int MaxHealth
+        public float MaxHealth
         {
             get { return base.maxHealth; }
         }
-        public int Attack
+        public float Attack
         {
             get { return base.attack; }
             set { base.attack = value; }
         }
 
-        public int AttackRange
+        public float AttackRange
         {
             get { return base.attackRange; }
             set { base.attackRange = value; }
         }
-        public int Speed
+        public float Speed
         {
             get { return base.speed; }
             set { base.speed = value; }
         }
-        public int Faction
+        public float Faction
         {
             get { return base.faction; }
         }
@@ -65,7 +65,7 @@ namespace Assets.Scripts
             get { return base.isDead; }
             set { base.isDead = value; }
         }
-        public RangedUnit(Vector3 _postion, string _name, int _health, int _attack, int _attackRange, int _speed, int _faction)
+        public RangedUnit(Vector3 _postion, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
         {
             Position = _postion;
             Name = _name;
