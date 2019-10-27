@@ -37,8 +37,14 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
+
+        public float meleeCost { get; set; } = 10f;
+        public float rangedCost { get; set; } = 10f;
+        public float wizardCost { get; set; } = 20f;
+        public float resourcesRemaining;
+        System.Random r = new System.Random();
         
-        public FactoryBuilding(GameObject _gameUnit, string _name, float _health, float _faction)
+        public FactoryBuilding(GameObject _gameUnit, string _name, float _health, float _faction, float _resourcesRemaining)
         {
             GameUnit = _gameUnit;
             Name = _name;
@@ -46,8 +52,26 @@ namespace Assets.Scripts
             base.maxHealth = _health;
             base.faction = _faction;
             Destroyed = false;
+            resourcesRemaining = _resourcesRemaining;
         }
        
+        public void ProduceUnit()
+        {
+            
+            if((r.Next(0, 3) == 0)&&(resourcesRemaining-meleeCost)>=0) //0 Melee
+            {
+                //code or function for unit generation here
+            }
+            else if((r.Next(0, 3) == 0) && (resourcesRemaining - rangedCost) >= 0) // 1 Ranged
+            {
+                //code or function for unit generation here
+            }
+            else if((r.Next(0, 3) == 0) && (resourcesRemaining - wizardCost) >= 0) // 2 Wizard
+            {
+                //code or function for unit generation here
+            }
+        }
+
         public override void Destruction()
         {
             Destroyed = true;
