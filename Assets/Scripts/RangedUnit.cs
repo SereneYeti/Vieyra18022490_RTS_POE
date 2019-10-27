@@ -79,14 +79,75 @@ namespace Assets.Scripts
             IsDead = false;
 
         }
-        public override (Unit, int) Closest(List<Unit> units)
+        public override (Unit, float) Closest(List<Unit> units)
         {
-            throw new NotImplementedException();
+            //Finds the closes unit around for combat
+            float shortest = 100f; //Radius for combat
+            Unit closest = this;
+            //Closest Unit and Distance                    
+            foreach (Unit u in units)
+            {
+                if (u is MeleeUnit && u != this)
+                {
+                    MeleeUnit otherMu = (MeleeUnit)u;
+                    float distance = Math.Abs(this.Position.x - otherMu.Position.x)
+                               + Math.Abs(this.Position.z - otherMu.Position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherMu;
+                    }
+                }
+                else if (u is RangedUnit && u != this)
+                {
+                    RangedUnit otherRu = (RangedUnit)u;
+                    float distance = Math.Abs(this.Position.x - otherRu.Position.x)
+                               + Math.Abs(this.Position.z - otherRu.Position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRu;
+                    }
+                }
+                else if (u is WizardUnit && u != this)
+                {
+                    WizardUnit otherWu = (WizardUnit)u;
+                    float distance = Math.Abs(this.Position.x - otherWu.Position.x)
+                               + Math.Abs(this.Position.z - otherWu.Position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherWu;
+                    }
+                }
+
+            }
+            return (closest, shortest);
         }
 
         public override void Combat(Unit attacker)
         {
-            throw new NotImplementedException();
+            //Handles the combat between two units
+            if (attacker is MeleeUnit)
+            {
+                Health = Health - ((MeleeUnit)attacker).Attack;
+            }
+            else if (attacker is RangedUnit)
+            {
+                RangedUnit ru = (RangedUnit)attacker;
+                Health = Health - (ru.Attack - ru.AttackRange);
+            }
+            else if (attacker is WizardUnit)
+            {
+                WizardUnit wu = (WizardUnit)attacker;
+                Health = Health - (wu.Attack - wu.AttackRange);
+            }
+
+            if (Health <= 0)
+            {   //This is when the Death method is called as no health remaining has been confirmed
+
+                Death(); //DEATH !!!
+            }
         }
 
         public override void Death()
@@ -112,7 +173,7 @@ namespace Assets.Scripts
                 otherPosition = ((RangedUnit)other).Position;
             }
 
-            distance = Math.Abs(Position.x - otherPosition.x) + Math.Abs(Position.y - otherPosition.y);
+            distance = Math.Abs(Position.x - otherPosition.x) + Math.Abs(Position.z - otherPosition.z);
 
             if (distance <= AttackRange)
             {

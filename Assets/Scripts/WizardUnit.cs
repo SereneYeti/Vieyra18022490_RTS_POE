@@ -9,7 +9,63 @@ namespace Assets.Scripts
 {
     class WizardUnit : Unit
     {
-        public override (Unit, int) Closest(List<Unit> units)
+        public string Name
+        {
+            get { return base.name; }
+            set { base.name = value; }
+        }
+        public Vector3 Position
+        {
+            get { return base.position; }
+            set { base.position = value; }
+        }
+
+        public float Health
+        {
+            get { return base.health; }
+            set { base.health = value; }
+        }
+        public float MaxHealth
+        {
+            get { return base.maxHealth; }
+        }
+        public float Attack
+        {
+            get { return base.attack; }
+            set { base.attack = value; }
+        }
+
+        public float AttackRange
+        {
+            get { return base.attackRange; }
+            set { base.attackRange = value; }
+        }
+        public float Speed
+        {
+            get { return base.speed; }
+            set { base.speed = value; }
+        }
+        public float Faction
+        {
+            get { return base.faction; }
+        }
+        //public string Symbol
+        //{  Not Used at the moment
+        //    get { return base.symbol; }
+        //    set { base.symbol = value; }
+        //}
+        public bool IsAttacking
+        {
+            get { return base.isAttacking; }
+            set { base.isAttacking = value; }
+        }
+        public bool IsDead
+        {
+            get { return base.isDead; }
+            set { base.isDead = value; }
+        }
+
+        public override (Unit, float) Closest(List<Unit> units)
         {
             throw new NotImplementedException();
         }
