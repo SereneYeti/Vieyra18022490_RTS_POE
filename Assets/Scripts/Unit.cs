@@ -11,10 +11,11 @@ namespace Assets.Scripts
     {
         //Abstract class with no code implemented 
         //Used for the sake of re-use and inheritance        
-        protected Vector3 position;
+        //protected Vector3 position;
         protected float health;
         protected float maxHealth;
         protected float speed;
+        protected float direction;
         protected float attack;
         protected float attackRange;
         protected float faction;
@@ -26,7 +27,7 @@ namespace Assets.Scripts
         protected GameObject gameUnit;
         
         
-        public abstract void Move(Vector3 _position,int dir);
+        public abstract void Move(Vector3 _position,float dir);
         public abstract void Combat(Unit attacker);
         public abstract bool InRange(Unit other);
         public abstract (Unit, float) Closest(List<Unit> units);

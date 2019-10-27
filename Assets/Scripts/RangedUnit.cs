@@ -15,12 +15,6 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public Vector3 Position
-        {
-            get { return base.position; }
-            set { base.position = value; }
-        }
-        
         public float Health
         {
             get { return base.health; }
@@ -65,9 +59,14 @@ namespace Assets.Scripts
             get { return base.isDead; }
             set { base.isDead = value; }
         }
-        public RangedUnit(Vector3 _postion, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
+        public GameObject GameUnit
         {
-            Position = _postion;
+            get { return base.gameUnit; }
+            set { base.gameUnit = value; }
+        }
+        public RangedUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
+        {
+            GameUnit = _gameUnit;
             Name = _name;
             Health = _health;
             base.maxHealth = _health;

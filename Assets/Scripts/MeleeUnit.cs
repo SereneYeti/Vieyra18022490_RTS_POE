@@ -14,12 +14,6 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public Vector3 Position
-        {
-            get { return base.position; }
-            set { base.position = value; }
-        }
-        
         public float Health
         {
             get { return base.health; }
@@ -45,6 +39,11 @@ namespace Assets.Scripts
             get { return base.speed; }
             set { base.speed = value; }
         }
+        public float Direction //0 is north and the cardianl points follow in order and ending with West at 3
+        {
+            get { return base.direction; }
+            set { base.direction = value; }
+        }
         public float Faction
         {
             get { return base.faction; }
@@ -69,15 +68,16 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
-        public MeleeUnit(Vector3 _position, string _name, float _health, float _attack, float _speed, float _faction, GameObject _gameObject)
+        public MeleeUnit( string _name, float _health, float _attack, float _speed, float _direction, float _faction, GameObject _gameObject)
         {
-            Position = _position;
+            //Position = _position;
             Name = _name;
             Health = _health;
             base.maxHealth = _health;
             Attack = _attack;
             AttackRange = 1f;
             Speed = _speed;
+            Direction = _direction;
             base.faction = _faction;
             IsAttacking = false;
             IsDead = false;
@@ -152,7 +152,6 @@ namespace Assets.Scripts
                 Death(); //DEATH !!!
             }
         }
-
         public override void Death()
         {
             IsDead = true;
@@ -161,7 +160,6 @@ namespace Assets.Scripts
 
             
         }
-
         public override bool InRange(Unit other)
         {
             //Checks wether units are in range of each other so they can fight
@@ -189,8 +187,7 @@ namespace Assets.Scripts
                 return false;
             }
         }
-
-        public override void Move(Vector3 _position,int dir)
+        public override void Move(Vector3 _position,float dir)
         {   //Handles the movement of the units as unity is being used we can use a vector which keeps track of the movement now and has a x,y & z pos. 
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
             switch (dir)
@@ -202,14 +199,13 @@ namespace Assets.Scripts
                 default: break;
             }
         }
-
         public override string ToString()
         {   //Override of the ToString Funciton in order to return the required string output when needed with ease. 
             string temp = "";
             temp += "Melee:";
             //temp += Name;
             //temp += "{" + Symbol + "}";
-            temp += "(" + Position.x + "," + Position.y + "," + Position.z + ")";
+            temp += "(" + GameUnit.transform.position.x + "," + GameUnit.transform.position.y + "," + GameUnit.transform.position.z + ")";
             temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
             temp += (IsDead ? " DEAD!" : " ALIVE!");
             return temp;

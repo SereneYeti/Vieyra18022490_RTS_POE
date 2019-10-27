@@ -14,12 +14,6 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public Vector3 Position
-        {
-            get { return base.position; }
-            set { base.position = value; }
-        }
-
         public float Health
         {
             get { return base.health; }
@@ -64,7 +58,25 @@ namespace Assets.Scripts
             get { return base.isDead; }
             set { base.isDead = value; }
         }
+        public GameObject GameUnit
+        {
+            get { return base.gameUnit; }
+            set { base.gameUnit = value; }
+        }
+        public WizardUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
+        {
+            GameUnit = _gameUnit;
+            Name = _name;
+            Health = _health;
+            base.maxHealth = _health;
+            Attack = _attack;
+            AttackRange = _attackRange;
+            Speed = _speed;
+            base.faction = _faction;
+            IsAttacking = false;
+            IsDead = false;
 
+        }
         public override (Unit, float) Closest(List<Unit> units)
         {
             throw new NotImplementedException();
@@ -82,17 +94,61 @@ namespace Assets.Scripts
 
         public override bool InRange(Unit other)
         {
-            throw new NotImplementedException();
+            //Checks wether units are in range of each other so they can fight
+            float distance;
+            //int otherX = 0;
+            //int otherY = 0;
+            GameObject otherUnit = new GameObject();
+            if (other is MeleeUnit)
+            {
+                otherUnit = ((MeleeUnit)other).GameUnit;
+            }
+            else if (other is RangedUnit)
+            {
+                otherUnit = ((RangedUnit)other).GameUnit;
+            }
+            else if (other is WizardUnit)
+            {
+                otherUnit = ((WizardUnit)other).GameUnit;
+            }
+
+            distance = Math.Abs(GameUnit.transform.position.x - otherUnit.transform.position.x) + Math.Abs(GameUnit.transform.position.z - otherUnit.transform.position.z);
+
+            if (distance <= AttackRange)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public override void Move(Vector3 _movement, int dir)
+        public override void Move(Vector3 _position, float dir)
         {
-            throw new NotImplementedException();
+            //Handles the movement of the units
+            //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
+            switch (dir)
+            {
+                case 0: _position.z++; GameUnit.transform.position = _position; break; //North (Swaped)
+                case 1: _position.x++; GameUnit.transform.position = _position; break; //East
+                case 2: _position.z--; GameUnit.transform.position = _position; break; //South (Swaped)
+                case 3: _position.x--; GameUnit.transform.position = _position; break; //West
+                default: break;
+            }
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            //Override of the ToString Funciton in order to return the required string output when needed with ease.
+            string temp = "";
+            temp += "Wizard: ";
+            //temp += Name;
+            //temp += "{" + Symbol + "}";
+            temp += "(" + GameUnit.transform.position.x + "," + GameUnit.transform.position.y + "," + GameUnit.transform.position.z + ")";
+            temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
+            temp += (IsDead ? " DEAD!" : " ALIVE!");
+            return temp;
         }
     }
 }
