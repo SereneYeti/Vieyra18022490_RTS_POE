@@ -82,14 +82,37 @@ namespace Assets.Scripts
             throw new NotImplementedException();
         }
 
-        public override void Combat(Unit attacker)
+        public override void Combat(Unit attacker) //N.B.!!!! NEED TO CHANGE COMBAT FOR THE WIZARD AOE
         {
-            throw new NotImplementedException();
+            //Handles the combat between two units
+            
+            if (attacker is MeleeUnit)
+            {
+                Health = Health - ((MeleeUnit)attacker).Attack;
+            }
+            else if (attacker is RangedUnit)
+            {
+                RangedUnit ru = (RangedUnit)attacker;
+                Health = Health - (ru.Attack - ru.AttackRange);
+            }
+            else if (attacker is WizardUnit)
+            {
+                WizardUnit wu = (WizardUnit)attacker;
+                Health = Health - (wu.Attack - wu.AttackRange);
+            }
+
+            if (Health <= 0)
+            {   //This is when the Death method is called as no health remaining has been confirmed
+
+                Death(); //DEATH !!!
+            }
         }
 
         public override void Death()
         {
-            throw new NotImplementedException();
+            IsDead = true;
+            Health = 0;
+            IsAttacking = false;
         }
 
         public override bool InRange(Unit other)

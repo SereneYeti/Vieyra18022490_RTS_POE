@@ -89,8 +89,8 @@ namespace Assets.Scripts
                 if (u is MeleeUnit && u != this)
                 {
                     MeleeUnit otherMu = (MeleeUnit)u;
-                    float distance = Math.Abs(this.Position.x - otherMu.Position.x)
-                               + Math.Abs(this.Position.z - otherMu.Position.z);
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherMu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherMu.GameUnit.transform.position.z);
                     if (distance < shortest)
                     {
                         shortest = distance;
@@ -100,8 +100,8 @@ namespace Assets.Scripts
                 else if (u is RangedUnit && u != this)
                 {
                     RangedUnit otherRu = (RangedUnit)u;
-                    float distance = Math.Abs(this.Position.x - otherRu.Position.x)
-                               + Math.Abs(this.Position.z - otherRu.Position.z);
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherRu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherRu.GameUnit.transform.position.z);
                     if (distance < shortest)
                     {
                         shortest = distance;
@@ -111,8 +111,8 @@ namespace Assets.Scripts
                 else if (u is WizardUnit && u != this)
                 {
                     WizardUnit otherWu = (WizardUnit)u;
-                    float distance = Math.Abs(this.Position.x - otherWu.Position.x)
-                               + Math.Abs(this.Position.z - otherWu.Position.z);
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherWu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherWu.GameUnit.transform.position.z);
                     if (distance < shortest)
                     {
                         shortest = distance;
@@ -162,17 +162,21 @@ namespace Assets.Scripts
             float distance;
             //int otherX = 0;
             //int otherY = 0;
-            Vector3 otherPosition = new Vector3();
+            GameObject otherUnit = new GameObject();
             if (other is MeleeUnit)
             {
-                otherPosition = ((MeleeUnit)other).Position;
+                otherUnit = ((MeleeUnit)other).GameUnit;
             }
             else if (other is RangedUnit)
             {
-                otherPosition = ((RangedUnit)other).Position;
+                otherUnit = ((RangedUnit)other).GameUnit;
+            }
+            else if (other is WizardUnit)
+            {
+                otherUnit = ((WizardUnit)other).GameUnit;
             }
 
-            distance = Math.Abs(Position.x - otherPosition.x) + Math.Abs(Position.z - otherPosition.z);
+            distance = Math.Abs(GameUnit.transform.position.x - otherUnit.transform.position.x) + Math.Abs(GameUnit.transform.position.z - otherUnit.transform.position.z);
 
             if (distance <= AttackRange)
             {
@@ -184,16 +188,16 @@ namespace Assets.Scripts
             }
         }
 
-        public override void Move(Vector3 _position,int dir)
+        public override void Move(Vector3 _position,float dir)
         {
             //Handles the movement of the units
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
             switch (dir)
             {
-                case 0: _position.z++; break; //North (Swaped)
-                case 1: _position.x++; break; //East
-                case 2: _position.z--; break; //South (Swaped)
-                case 3: _position.x--; break; //West
+                case 0: _position.z++; GameUnit.transform.position = _position; break; //North (Swaped)
+                case 1: _position.x++; GameUnit.transform.position = _position; break; //East
+                case 2: _position.z--; GameUnit.transform.position = _position; break; //South (Swaped)
+                case 3: _position.x--; GameUnit.transform.position = _position; break; //West
                 default: break;
             }
         }
@@ -205,7 +209,7 @@ namespace Assets.Scripts
             temp += "Ranged: ";
             //temp += Name;
             //temp += "{" + Symbol + "}";
-            temp += "(" + Position.x + "," + Position.y + "," + Position.z + ")";
+            temp += "(" + GameUnit.transform.position.x + "," + GameUnit.transform.position.y + "," + GameUnit.transform.position.z + ")";
             temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
             temp += (IsDead ? " DEAD!" : " ALIVE!");
             return temp;
