@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -13,16 +14,12 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public int XPos
+        public Vector3 Movement
         {
-            get { return base.xPos; }
-            set { base.xPos = value; }
+            get { return base.movement; }
+            set { base.movement = value; }
         }
-        public int YPos
-        {
-            get { return base.yPos; }
-            set { base.yPos = value; }
-        }
+        
         public int Health
         {
             get { return base.health; }
@@ -67,10 +64,9 @@ namespace Assets.Scripts
             get { return base.isDead; }
             set { base.isDead = value; }
         }
-        public MeleeUnit(int x, int y, string _name, int _health, int _attack, int _speed, int _faction)
+        public MeleeUnit(Vector3 _movement, string _name, int _health, int _attack, int _speed, int _faction)
         {
-            XPos = x;
-            YPos = y;
+            Movement = _movement;
             Name = _name;
             Health = _health;
             base.maxHealth = _health;
@@ -103,14 +99,29 @@ namespace Assets.Scripts
             throw new NotImplementedException();
         }
 
-        public override void Move(int dir)
-        {
-            throw new NotImplementedException();
+        public override void Move(Vector3 _movement,int dir)
+        {   //Handles the movement of the units as unity is being used we can use a vector which keeps track of the movement now and has a x,y & z pos. 
+            //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
+            switch (dir)
+            {
+                case 0: _movement.z++; break; //North (Swaped)
+                case 1: _movement.x++; break; //East
+                case 2: _movement.z--; break; //South (Swaped)
+                case 3: _movement.x--; break; //West
+                default: break;
+            }
         }
 
         public override string ToString()
-        {
-            throw new NotImplementedException();
+        {   //Override of the ToString Funciton in order to return the required string output when needed with ease. 
+            string temp = "";
+            temp += "Melee:";
+            temp += Name;
+            //temp += "{" + Symbol + "}";
+            temp += "(" + Movement.x + "," + Movement.y + "," + Movement.z + ")";
+            temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
+            temp += (IsDead ? " DEAD!" : " ALIVE!");
+            return temp;
         }
     }
 }

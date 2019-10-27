@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -28,7 +29,7 @@ namespace Assets.Scripts
             throw new NotImplementedException();
         }
 
-        public override void Move(int dir)
+        public override void Move(Vector3 _movement, int dir)
         {
             throw new NotImplementedException();
         }
