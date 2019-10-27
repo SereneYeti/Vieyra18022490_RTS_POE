@@ -77,6 +77,7 @@ namespace Assets.Scripts
             IsDead = false;
 
         }
+        //TO DO: FIX COMBAT FOR WIZARDS - AOE ATTACK
         public override (Unit, float) Closest(List<Unit> units)
         {
             //Finds the closes unit around for combat

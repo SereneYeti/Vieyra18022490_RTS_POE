@@ -46,6 +46,7 @@ namespace Assets.Scripts
         public float resourcesPerRound { get; set; }
         public float resourcesRemaining { get; set; }
         public float resourcesGenerated { get; set; }
+        private string resourceInfo;
         public ResourceBuilding(GameObject _gameUnit, string _name, float _health, float _faction, float _resourcesPerRound, float _resourcesRemaing)
         {
             GameUnit = _gameUnit;
@@ -57,10 +58,21 @@ namespace Assets.Scripts
             resourcesPerRound = _resourcesPerRound;
             resourcesRemaining = _resourcesRemaing;
             resourcesGenerated = 0;
-        }        
+        }  
+        public void GenerateResources()
+        {
+            if(((resourcesRemaining - resourcesPerRound)>=0f)&&(Destroyed == false))
+            {
+                resourcesGenerated += resourcesPerRound;
+                resourcesRemaining -= resourcesPerRound;
+            }
+            resourceInfo = "Resources Remaining: " + resourcesPerRound + "\nResources per round: " + resourcesGenerated
+                + "\nResources Generated: " + resourcesRemaining;
+        }
         public override void Destruction()
         {
-            throw new NotImplementedException();
+            Destroyed = true;
+            Health = 0;
         }
 
         public override string ToString()
@@ -72,7 +84,8 @@ namespace Assets.Scripts
             //temp += "{" + Symbol + "}";
             temp += "(" + GameUnit.transform.position.x + "," + GameUnit.transform.position.y + "," + GameUnit.transform.position.z + ")";
             temp += Health;
-            temp += (Destroyed ? ", (DESTROYED!)" : ", (WORKING!)");
+            temp += (Destroyed ? ", (DESTROYED!)\n" : ", (WORKING!)\n");
+            temp += resourceInfo;
             return temp;
         }
     }

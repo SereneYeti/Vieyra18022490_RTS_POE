@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -26,7 +27,7 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public bool IsDead
+        public bool Destroyed
         {
             get { return base.destroyed; }
             set { base.destroyed = value; }
@@ -36,14 +37,34 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
+        
+        public FactoryBuilding(GameObject _gameUnit, string _name, float _health, float _faction)
+        {
+            GameUnit = _gameUnit;
+            Name = _name;
+            Health = _health;
+            base.maxHealth = _health;
+            base.faction = _faction;
+            Destroyed = false;
+        }
+       
         public override void Destruction()
         {
-            throw new NotImplementedException();
+            Destroyed = true;
+            Health = 0;
         }
 
         public override string ToString()
         {
-            throw new NotImplementedException();
+            //Override of the ToString Funciton in order to return the required string output when needed with ease.
+            string temp = "";
+            temp += "Factory Building: ";
+            //temp += Name;
+            //temp += "{" + Symbol + "}";
+            temp += "(" + GameUnit.transform.position.x + "," + GameUnit.transform.position.y + "," + GameUnit.transform.position.z + ")";
+            temp += Health;
+            temp += (Destroyed ? ", (DESTROYED!)\n" : ", (WORKING!)\n");
+            return temp;
         }
     }
 }
