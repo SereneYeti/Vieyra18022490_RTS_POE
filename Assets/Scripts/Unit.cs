@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-    public abstract class Unit
+    public abstract class Unit 
     {
         //Abstract class with no code implemented 
         //Used for the sake of re-use and inheritance        
-        protected Vector3 movement;
+        protected Vector3 position;
         protected int health;
         protected int maxHealth;
         protected int speed;
@@ -23,7 +23,8 @@ namespace Assets.Scripts
         protected bool isAttacking;
         protected bool isDead;
         
-        public abstract void Move(Vector3 _movement,int dir);
+        
+        public abstract void Move(Vector3 _position,int dir);
         public abstract void Combat(Unit attacker);
         public abstract bool InRange(Unit other);
         public abstract (Unit, int) Closest(List<Unit> units);

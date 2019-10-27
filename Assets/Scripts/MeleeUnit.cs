@@ -14,10 +14,10 @@ namespace Assets.Scripts
             get { return base.name; }
             set { base.name = value; }
         }
-        public Vector3 Movement
+        public Vector3 Position
         {
-            get { return base.movement; }
-            set { base.movement = value; }
+            get { return base.position; }
+            set { base.position = value; }
         }
         
         public int Health
@@ -64,9 +64,9 @@ namespace Assets.Scripts
             get { return base.isDead; }
             set { base.isDead = value; }
         }
-        public MeleeUnit(Vector3 _movement, string _name, int _health, int _attack, int _speed, int _faction)
+        public MeleeUnit(Vector3 _position, string _name, int _health, int _attack, int _speed, int _faction)
         {
-            Movement = _movement;
+            Position = _position;
             Name = _name;
             Health = _health;
             base.maxHealth = _health;
@@ -96,18 +96,41 @@ namespace Assets.Scripts
 
         public override bool InRange(Unit other)
         {
-            throw new NotImplementedException();
+            //Checks wether units are in range of each other so they can fight
+            float distance;
+            //int otherX = 0;
+            //int otherY = 0;
+            Vector3 otherPosition = new Vector3();
+            if (other is MeleeUnit)
+            {
+                otherPosition = ((MeleeUnit)other).Position;
+            }
+            else if (other is RangedUnit)
+            {
+                otherPosition = ((RangedUnit)other).Position;
+            }
+
+            distance = Math.Abs(Position.x - otherPosition.x) + Math.Abs(Position.y - otherPosition.y);
+
+            if (distance <= AttackRange)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public override void Move(Vector3 _movement,int dir)
+        public override void Move(Vector3 _position,int dir)
         {   //Handles the movement of the units as unity is being used we can use a vector which keeps track of the movement now and has a x,y & z pos. 
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
             switch (dir)
             {
-                case 0: _movement.z++; break; //North (Swaped)
-                case 1: _movement.x++; break; //East
-                case 2: _movement.z--; break; //South (Swaped)
-                case 3: _movement.x--; break; //West
+                case 0: _position.z++; break; //North (Swaped)
+                case 1: _position.x++; break; //East
+                case 2: _position.z--; break; //South (Swaped)
+                case 3: _position.x--; break; //West
                 default: break;
             }
         }
@@ -116,9 +139,9 @@ namespace Assets.Scripts
         {   //Override of the ToString Funciton in order to return the required string output when needed with ease. 
             string temp = "";
             temp += "Melee:";
-            temp += Name;
+            //temp += Name;
             //temp += "{" + Symbol + "}";
-            temp += "(" + Movement.x + "," + Movement.y + "," + Movement.z + ")";
+            temp += "(" + Position.x + "," + Position.y + "," + Position.z + ")";
             temp += Health + ", " + Attack + ", " + AttackRange + ", " + Speed;
             temp += (IsDead ? " DEAD!" : " ALIVE!");
             return temp;
