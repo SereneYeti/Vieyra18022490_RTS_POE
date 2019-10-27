@@ -79,7 +79,48 @@ namespace Assets.Scripts
         }
         public override (Unit, float) Closest(List<Unit> units)
         {
-            throw new NotImplementedException();
+            //Finds the closes unit around for combat
+            float shortest = 100f; //Radius for combat
+            Unit closest = this;
+            //Closest Unit and Distance                    
+            foreach (Unit u in units)
+            {
+                if (u is MeleeUnit && u != this)
+                {
+                    MeleeUnit otherMu = (MeleeUnit)u;
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherMu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherMu.GameUnit.transform.position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherMu;
+                    }
+                }
+                else if (u is RangedUnit && u != this)
+                {
+                    RangedUnit otherRu = (RangedUnit)u;
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherRu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherRu.GameUnit.transform.position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherRu;
+                    }
+                }
+                else if (u is WizardUnit && u != this)
+                {
+                    WizardUnit otherWu = (WizardUnit)u;
+                    float distance = Math.Abs(this.GameUnit.transform.position.x - otherWu.GameUnit.transform.position.x)
+                               + Math.Abs(this.GameUnit.transform.position.z - otherWu.GameUnit.transform.position.z);
+                    if (distance < shortest)
+                    {
+                        shortest = distance;
+                        closest = otherWu;
+                    }
+                }
+
+            }
+            return (closest, shortest);
         }
 
         public override void Combat(Unit attacker) //N.B.!!!! NEED TO CHANGE COMBAT FOR THE WIZARD AOE
