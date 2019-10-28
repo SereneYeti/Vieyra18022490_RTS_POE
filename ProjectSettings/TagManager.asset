@@ -9,6 +9,7 @@ TagManager:
   - WizardUnit
   - MeleeUnit
   - RangedUnit
+  - Barrier
   layers:
   - Default
   - TransparentFX

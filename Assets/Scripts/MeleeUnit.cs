@@ -199,10 +199,10 @@ namespace Assets.Scripts
             
             switch (dir)
             {
-                case 0: GameUnit.transform.Translate(0f,0f,1f); break; //North (Swaped)
-                case 1: GameUnit.transform.Translate(1f, 0f, 0f); break; //East
-                case 2: GameUnit.transform.Translate(0f, 0f, -1f); break; //South (Swaped)
-                case 3: GameUnit.transform.Translate(-1f, 0f, 0f); break; //West
+                case 0: GameUnit.transform.Translate(0f,0f,10f); break; //North (Swaped)
+                case 1: GameUnit.transform.Translate(10f, 0f, 0f); break; //East
+                case 2: GameUnit.transform.Translate(0f, 0f, -10f); break; //South (Swaped)
+                case 3: GameUnit.transform.Translate(-10f, 0f, 0f); break; //West
                 default: break;
             }
         }

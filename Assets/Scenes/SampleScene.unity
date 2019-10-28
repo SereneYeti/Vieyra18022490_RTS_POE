@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.5009044, y: -0, z: -0, w: 0.8655027}
-  m_LocalPosition: {x: -2.2, y: 40.1, z: -22.9}
+  m_LocalPosition: {x: 32.1, y: 39.6, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -307,7 +307,7 @@ MonoBehaviour:
   factoryBuilding2: {fileID: 5597872287109433278, guid: afea080cee0d587498b2b6f428de7c65,
     type: 3}
   Wizard3: {fileID: 3840436889954786640, guid: 8370876eb81c3174091ef0c4293862c4, type: 3}
-  Barrier: {fileID: 0}
+  Barrier: {fileID: 4947969414173086971, guid: c60a3493f3d2e1d4cb334f9dea604293, type: 3}
 --- !u!1 &1450654610
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450654610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.5, y: 0, z: 8.1}
+  m_LocalPosition: {x: 27.9, y: 0, z: 25.3}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}

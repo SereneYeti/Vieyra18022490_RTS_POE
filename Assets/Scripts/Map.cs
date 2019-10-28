@@ -73,7 +73,7 @@ namespace Assets.Scripts
                     MeleeUnit mu = (MeleeUnit)units[i];
                     if (mu.Health <= mu.MaxHealth * 0.25) // Running Away
                     {
-                        mu.Move(Position,rnd.Next(0, 4));
+                        mu.Move(rnd.Next(0, 4));
                     }
                     else
                     {
@@ -92,19 +92,19 @@ namespace Assets.Scripts
                                 MeleeUnit closestMu = (MeleeUnit)closest;
                                 if (mu.GameUnit.transform.position.x > closestMu.GameUnit.transform.position.x) //North
                                 {
-                                    mu.Move(Position,0);
+                                    mu.Move(0);
                                 }
                                 else if (mu.GameUnit.transform.position.x < closestMu.GameUnit.transform.position.x) //South
                                 {
-                                    mu.Move(Position, 2);
+                                    mu.Move(2);
                                 }
                                 else if (mu.GameUnit.transform.position.z > closestMu.GameUnit.transform.position.z) //West
                                 {
-                                    mu.Move(Position, 3);
+                                    mu.Move(3);
                                 }
                                 else if (mu.GameUnit.transform.position.z < closestMu.GameUnit.transform.position.z) //East
                                 {
-                                    mu.Move(Position, 1);
+                                    mu.Move(1);
                                 }
                             }
                             else if (closest is RangedUnit)
@@ -112,19 +112,19 @@ namespace Assets.Scripts
                                 RangedUnit closestRu = (RangedUnit)closest;
                                 if (mu.GameUnit.transform.position.x > closestRu.GameUnit.transform.position.x) //North
                                 {
-                                    mu.Move(Position, 0);
+                                    mu.Move(0);
                                 }
                                 else if (mu.GameUnit.transform.position.x < closestRu.GameUnit.transform.position.x) //South
                                 {
-                                    mu.Move(Position, 2);
+                                    mu.Move(2);
                                 }
                                 else if (mu.GameUnit.transform.position.z > closestRu.GameUnit.transform.position.z) //West
                                 {
-                                    mu.Move(Position, 3);
+                                    mu.Move(3);
                                 }
                                 else if (mu.GameUnit.transform.position.z < closestRu.GameUnit.transform.position.z) //East
                                 {
-                                    mu.Move(Position, 1);
+                                    mu.Move(1);
                                 }
                             }
                             else if (closest is WizardUnit)
@@ -132,19 +132,19 @@ namespace Assets.Scripts
                                 WizardUnit closestWu = (WizardUnit)closest;
                                 if (mu.GameUnit.transform.position.x > closestWu.GameUnit.transform.position.x) //North
                                 {
-                                    mu.Move(Position, 0);
+                                    mu.Move(0);
                                 }
                                 else if (mu.GameUnit.transform.position.x < closestWu.GameUnit.transform.position.x) //South
                                 {
-                                    mu.Move(Position, 2);
+                                    mu.Move(2);
                                 }
                                 else if (mu.GameUnit.transform.position.z > closestWu.GameUnit.transform.position.z) //West
                                 {
-                                    mu.Move(Position, 3);
+                                    mu.Move(3);
                                 }
                                 else if (mu.GameUnit.transform.position.z < closestWu.GameUnit.transform.position.z) //East
                                 {
-                                    mu.Move(Position, 1);
+                                    mu.Move(1);
                                 }
                             }
                         }
@@ -175,19 +175,19 @@ namespace Assets.Scripts
                             MeleeUnit closestMu = (MeleeUnit)closest;
                             if (ru.GameUnit.transform.position.x > closestMu.GameUnit.transform.position.x) //North
                             {
-                                ru.Move(Position, 0);
+                                ru.Move(0);
                             }
                             else if (ru.GameUnit.transform.position.x < closestMu.GameUnit.transform.position.x) //South
                             {
-                                ru.Move(Position, 2);
+                                ru.Move(2);
                             }
                             else if (ru.GameUnit.transform.position.z > closestMu.GameUnit.transform.position.z) //West
                             {
-                                ru.Move(Position, 3);
+                                ru.Move(3);
                             }
                             else if (ru.GameUnit.transform.position.z < closestMu.GameUnit.transform.position.z) //East
                             {
-                                ru.Move(Position, 1);
+                                ru.Move(1);
                             }
                         }
                         else if (closest is RangedUnit)
@@ -195,19 +195,19 @@ namespace Assets.Scripts
                             RangedUnit closestRu = (RangedUnit)closest;
                             if (ru.GameUnit.transform.position.x > closestRu.GameUnit.transform.position.x) //North
                             {
-                                ru.Move(Position, 0);
+                                ru.Move(0);
                             }
                             else if (ru.GameUnit.transform.position.x < closestRu.GameUnit.transform.position.x) //South
                             {
-                                ru.Move(Position, 2);
+                                ru.Move(2);
                             }
                             else if (ru.GameUnit.transform.position.z > closestRu.GameUnit.transform.position.z) //West
                             {
-                                ru.Move(Position, 3);
+                                ru.Move(3);
                             }
                             else if (ru.GameUnit.transform.position.z < closestRu.GameUnit.transform.position.z) //East
                             {
-                                ru.Move(Position, 1);
+                                ru.Move(1);
                             }
                         }
                         else if (closest is WizardUnit)
@@ -215,19 +215,19 @@ namespace Assets.Scripts
                             WizardUnit closestWu = (WizardUnit)closest;
                             if (ru.GameUnit.transform.position.x > closestWu.GameUnit.transform.position.x) //North
                             {
-                                ru.Move(Position, 0);
+                                ru.Move(0);
                             }
                             else if (ru.GameUnit.transform.position.x < closestWu.GameUnit.transform.position.x) //South
                             {
-                                ru.Move(Position, 2);
+                                ru.Move(2);
                             }
                             else if (ru.GameUnit.transform.position.z > closestWu.GameUnit.transform.position.z) //West
                             {
-                                ru.Move(Position, 3);
+                                ru.Move(3);
                             }
                             else if (ru.GameUnit.transform.position.z < closestWu.GameUnit.transform.position.z) //East
                             {
-                                ru.Move(Position, 1);
+                                ru.Move(1);
                             }
                         }
 
@@ -241,7 +241,7 @@ namespace Assets.Scripts
                     WizardUnit wu = (WizardUnit)units[i];
                     if (wu.Health <= wu.MaxHealth * 0.5) // Running Away
                     {
-                        wu.Move(Position, rnd.Next(0, 4));
+                        wu.Move(rnd.Next(0, 4));
                     }
                     else
                     {
@@ -260,19 +260,19 @@ namespace Assets.Scripts
                                 MeleeUnit closestMu = (MeleeUnit)closest;
                                 if (wu.GameUnit.transform.position.x > closestMu.GameUnit.transform.position.x) //North
                                 {
-                                    wu.Move(Position, 0);
+                                    wu.Move(0);
                                 }
                                 else if (wu.GameUnit.transform.position.x < closestMu.GameUnit.transform.position.x) //South
                                 {
-                                    wu.Move(Position,2);
+                                    wu.Move(2);
                                 }
                                 else if (wu.GameUnit.transform.position.z > closestMu.GameUnit.transform.position.z) //West
                                 {
-                                    wu.Move(Position, 3);
+                                    wu.Move(3);
                                 }
                                 else if (wu.GameUnit.transform.position.z < closestMu.GameUnit.transform.position.z) //East
                                 {
-                                    wu.Move(Position, 1);
+                                    wu.Move(1);
                                 }
                             }
                             else if (closest is RangedUnit)
@@ -280,19 +280,19 @@ namespace Assets.Scripts
                                 RangedUnit closestRu = (RangedUnit)closest;
                                 if (wu.GameUnit.transform.position.x > closestRu.GameUnit.transform.position.x) //North
                                 {
-                                    wu.Move(Position, 0);
+                                    wu.Move(0);
                                 }
                                 else if (wu.GameUnit.transform.position.x < closestRu.GameUnit.transform.position.x) //South
                                 {
-                                    wu.Move(Position, 2);
+                                    wu.Move(2);
                                 }
                                 else if (wu.GameUnit.transform.position.z > closestRu.GameUnit.transform.position.z) //West
                                 {
-                                    wu.Move(Position, 3);
+                                    wu.Move(3);
                                 }
                                 else if (wu.GameUnit.transform.position.z < closestRu.GameUnit.transform.position.z) //East
                                 {
-                                    wu.Move(Position, 1);
+                                    wu.Move(1);
                                 }
                             }
                             else if (closest is WizardUnit)
@@ -300,23 +300,57 @@ namespace Assets.Scripts
                                 WizardUnit closestWu = (WizardUnit)closest;
                                 if (wu.GameUnit.transform.position.x > closestWu.GameUnit.transform.position.x) //North
                                 {
-                                    wu.Move(Position, 0);
+                                    wu.Move(0);
                                 }
                                 else if (wu.GameUnit.transform.position.x < closestWu.GameUnit.transform.position.x) //South
                                 {
-                                    wu.Move(Position, 2);
+                                    wu.Move(2);
                                 }
                                 else if (wu.GameUnit.transform.position.z > closestWu.GameUnit.transform.position.z) //West
                                 {
-                                    wu.Move(Position, 3);
+                                    wu.Move(3);
                                 }
                                 else if (wu.GameUnit.transform.position.z < closestWu.GameUnit.transform.position.z) //East
                                 {
-                                    wu.Move(Position, 1);
+                                    wu.Move(1);
                                 }
                             }
                         }
 
+                    }
+                }
+
+            }
+            Display();
+
+            foreach(Unit u in units)
+            {
+                if(u is MeleeUnit)
+                {
+                    MeleeUnit mu = (MeleeUnit)u;
+                    if(mu.Health <= 0)
+                    {
+                        Destroy(mu.GameUnit);
+                        units.Remove(u);
+                    }
+                    
+                }
+                else if(u is RangedUnit)
+                {
+                    RangedUnit ru = (RangedUnit)u;
+                    if (ru.Health <= 0)
+                    {
+                        Destroy(ru.GameUnit);
+                        units.Remove(u);
+                    }
+                }
+                else if (u is WizardUnit)
+                {
+                    WizardUnit wu = (WizardUnit)u;
+                    if (wu.Health <= 0)
+                    {
+                        Destroy(wu.GameUnit);
+                        units.Remove(u);
                     }
                 }
 
