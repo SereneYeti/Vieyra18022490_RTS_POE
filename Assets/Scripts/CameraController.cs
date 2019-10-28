@@ -16,16 +16,34 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //    transform.position += new Vector3(Input.GetAxis("Horizontal"), 0f,         
-        //    Input.GetAxis("Vertical")) 
-        //    * speed; //Camera movement with W,S,A,D
-        //    transform.position += transform.forward * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed; //Camera Zoom with the Mouse wheel
-        //    transform.Rotate(Vector3.up, Input.GetAxis("Rotation") * rotationSpeed, Space.World); // Camera Rotation with Q and E
+
+        //transform.position += transform.right * Input.GetAxis("Horizontal") * speed; //Move the camera horizontally 
+        //transform.position += transform.forward * Input.GetAxis("Vertical") * speed; //Move the camera vertically
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += Vector3.right * speed;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position += Vector3.left * speed;
+        }
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += Vector3.forward * speed;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position += Vector3.back * speed;
+        }
 
 
-        transform.position += transform.right * Input.GetAxis("Horizontal") * speed; //Move the camera horizontally 
-        transform.position += transform.forward * Input.GetAxis("Vertical") * speed; //Move the camera vertically
-        transform.position += transform.up * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed; //Camera Zoom with the Mouse wheel
+        //transform.position += transform.up * Input.GetAxis("Mouse ScrollWheel") * zoomSpeed; //Camera Zoom with the Mouse wheel
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        transform.Translate(0, 0, scroll * zoomSpeed, Space.Self);
+
+
         transform.Rotate(Vector3.up, Input.GetAxis("Rotation") * rotationSpeed, Space.World); //Camera Rotation with Q and E
     }
 }
