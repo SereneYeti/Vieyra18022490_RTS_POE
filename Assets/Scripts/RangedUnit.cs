@@ -190,16 +190,16 @@ namespace Assets.Scripts
             }
         }
 
-        public override void Move(Vector3 _position,float dir)
-        {
-            //Handles the movement of the units
+        public override void Move(int dir)
+        {   //Handles the movement of the units as unity is being used we can use a vector which keeps track of the movement now and has a x,y & z pos. 
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
+
             switch (dir)
             {
-                case 0: _position.z++; GameUnit.transform.Translate(_position); break; //North (Swaped)
-                case 1: _position.x++; GameUnit.transform.Translate(_position); break; //East
-                case 2: _position.z--; GameUnit.transform.Translate(_position); break; //South (Swaped)
-                case 3: _position.x--; GameUnit.transform.Translate(_position); break; //West
+                case 0: GameUnit.transform.Translate(0f, 0f, 1f); break; //North (Swaped)
+                case 1: GameUnit.transform.Translate(1f, 0f, 0f); break; //East
+                case 2: GameUnit.transform.Translate(0f, 0f, -1f); break; //South (Swaped)
+                case 3: GameUnit.transform.Translate(-1f, 0f, 0f); break; //West
                 default: break;
             }
         }

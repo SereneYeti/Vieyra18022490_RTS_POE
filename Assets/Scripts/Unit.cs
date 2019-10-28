@@ -25,7 +25,7 @@ namespace Assets.Scripts
         protected bool isDead;
         //Used to keep track of the Game Object
         protected GameObject gameUnit;
-        public abstract void Move(Vector3 _position,float dir);
+        public abstract void Move(int dir);
         public abstract void Combat(Unit attacker);
         public abstract bool InRange(Unit other);
         public abstract (Unit, float) Closest(List<Unit> units);
