@@ -63,13 +63,9 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
-        public Building SpawnBuilding
-        {
-            get { return base.spawnBuilding; }
-            set { base.spawnBuilding = value; }
-        }
+        
         public int count = 0;
-        public WizardUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction, Building _spawnBuilding)
+        public WizardUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
         {
             GameUnit = _gameUnit;
             Name = _name;
@@ -81,7 +77,6 @@ namespace Assets.Scripts
             base.faction = _faction;
             IsAttacking = false;
             IsDead = false;
-            SpawnBuilding = _spawnBuilding;
             count++;
 
         }

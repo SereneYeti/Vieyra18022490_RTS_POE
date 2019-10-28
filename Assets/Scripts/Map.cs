@@ -24,7 +24,7 @@ namespace Assets.Scripts
         public GameObject factoryBuilding2;
         public GameObject Wizard3;
 
-        System.Random rnd = new System.Random();
+        public static System.Random rnd = new System.Random();
         Vector3 Position;
         public float meleeCost { get; set; } = 10f;
         public float rangedCost { get; set; } = 10f;
@@ -48,28 +48,59 @@ namespace Assets.Scripts
         {
             Position.y = 1;
             GenerateBuildings(2, 1);
-            Display();
+            DisplayBuildings();
         }
 
         // Update is called once per frame
         void Update()
         {
-            
+            foreach(Building b in buildings)
+            {
+                if(b is ResourceBuilding)
+                {
+                    ResourceBuilding rb = (ResourceBuilding)b;
+                    rb.GenerateResources();
+                }
+            }
+            GenerateUnits();            
+            Display();
         }
 
         public void GenerateBuildings(int rB, int fB)
         {
             for(int i = 0; i < rB; i++) //Resource Buildings
             {
-                Position.x = rnd.Next(0, 20);
-                Position.z = rnd.Next(0, 20);
-                resourceBuilding1.transform.position = Position;
+                {
+                    if(Position.x == rnd.Next(0,20)||(Position.z == rnd.Next(0,20)))
+                    {
+                        Position.x = rnd.Next(0, 20);
+                        Position.z = rnd.Next(0, 20);
+                        resourceBuilding1.transform.position = Position;
+                    }
+                    else
+                    {
+                        Position.x = rnd.Next(0, 20);
+                        Position.z = rnd.Next(0, 20);
+                        resourceBuilding1.transform.position = Position;
+                    }
+                    
+                }               
                 ResourceBuilding rb1 = new ResourceBuilding(resourceBuilding1,"resourceBuilding1_"+Convert.ToString(i),100,0,10,100); //Faction 0               
                 //resourceBuilding1.transform.Translate(Position);
                 buildings.Add(rb1);
-                Position.x = rnd.Next(0, 20);
-                Position.z = rnd.Next(0, 20);
-                resourceBuilding2.transform.position = Position;
+
+                if (Position.x == rnd.Next(0, 20) || (Position.z == rnd.Next(0, 20)))
+                {
+                    Position.x = rnd.Next(0, 20);
+                    Position.z = rnd.Next(0, 20);
+                    resourceBuilding2.transform.position = Position;
+                }
+                else
+                {
+                    Position.x = rnd.Next(0, 20);
+                    Position.z = rnd.Next(0, 20);
+                    resourceBuilding2.transform.position = Position;
+                }
                 ResourceBuilding rb2 = new ResourceBuilding(resourceBuilding2, "resourceBuilding2_" + Convert.ToString(i), 100, 1, 10, 1000); //Faction 1
                 //Position.x = rnd.Next(0, 5);
                 //Position.z = rnd.Next(0, 5);
@@ -118,7 +149,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Melee1.transform.position = pos;
-                                    MeleeUnit mu = new MeleeUnit("MeleeUnit1_", 30, 10, 1, 1, 0, Melee1,fb);
+                                    MeleeUnit mu = new MeleeUnit("MeleeUnit1_", 30, 10, 1, 1, 0, Melee1);
                                     mu.Name += mu.count;
                                     units.Add(mu);
                                 }
@@ -139,7 +170,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Melee2.transform.position = pos;
-                                    MeleeUnit mu = new MeleeUnit("MeleeUnit2_", 30, 10, 1, 1, 1, Melee2, fb);
+                                    MeleeUnit mu = new MeleeUnit("MeleeUnit2_", 30, 10, 1, 1, 1, Melee2);
                                     mu.Name += mu.count;
                                     units.Add(mu);
                                 }
@@ -164,7 +195,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Ranged1.transform.position = pos;
-                                    RangedUnit ru = new RangedUnit(Ranged1, "RangedUnit1_", 20, 15, 5, 1, 0,fb);
+                                    RangedUnit ru = new RangedUnit(Ranged1, "RangedUnit1_", 20, 15, 5, 1, 0);
                                     ru.Name += ru.count;
                                     units.Add(ru);
                                 }
@@ -185,7 +216,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Ranged2.transform.position = pos;
-                                    RangedUnit ru = new RangedUnit(Ranged2, "RangedUnit2_", 20, 15, 5, 1, 1, fb);
+                                    RangedUnit ru = new RangedUnit(Ranged2, "RangedUnit2_", 20, 15, 5, 1, 1);
                                     ru.Name += ru.count;
                                     units.Add(ru);
                                 }
@@ -208,7 +239,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Wizard1.transform.position = pos;
-                                    WizardUnit wu = new WizardUnit(Wizard1, "WizardUnit1_", 20, 10, 5, 1, 0,fb);
+                                    WizardUnit wu = new WizardUnit(Wizard1, "WizardUnit1_", 20, 10, 5, 1, 0);
                                     wu.Name += wu.count;
                                     units.Add(wu);
                                 }
@@ -228,7 +259,7 @@ namespace Assets.Scripts
                                     pos.x++;
                                     pos.z++;
                                     Wizard2.transform.position = pos;
-                                    WizardUnit wu = new WizardUnit(Wizard2, "WizardUnit2_", 20, 10, 5, 1, 1,fb);
+                                    WizardUnit wu = new WizardUnit(Wizard2, "WizardUnit2_", 20, 10, 5, 1, 1);
                                     wu.Name += wu.count;
                                     units.Add(wu);
                                 }
@@ -239,7 +270,7 @@ namespace Assets.Scripts
             }
         }
 
-        private void Display()
+        private void DisplayBuildings()
         {
             foreach (Building b in buildings)
             {
@@ -254,13 +285,15 @@ namespace Assets.Scripts
                     Instantiate(fb.GameUnit, fb.GameUnit.transform.position, Quaternion.identity);
                 }
             }
-
-            foreach(Unit u in units)
+        }
+        private void Display()
+        {
+            foreach (Unit u in units)
             {
-                if(u is MeleeUnit)
+                if (u is MeleeUnit)
                 {
                     MeleeUnit mu = (MeleeUnit)u;
-                    Instantiate(mu.GameUnit,mu.GameUnit.transform.position,Quaternion.identity);
+                    Instantiate(mu.GameUnit, mu.GameUnit.transform.position, Quaternion.identity);
                 }
                 else if (u is RangedUnit)
                 {
@@ -273,7 +306,6 @@ namespace Assets.Scripts
                     Instantiate(wu.GameUnit, wu.GameUnit.transform.position, Quaternion.identity);
                 }
             }
-
         }
     }
 }

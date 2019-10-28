@@ -68,13 +68,9 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
-        public Building SpawnBuilding
-        {
-            get { return base.spawnBuilding; }
-            set { base.spawnBuilding = value; }
-        }
+        
         public int count = 0;
-        public MeleeUnit( string _name, float _health, float _attack, float _speed, float _direction, float _faction, GameObject _gameObject, Building _spawnBuilding)
+        public MeleeUnit( string _name, float _health, float _attack, float _speed, float _direction, float _faction, GameObject _gameObject)
         {
             //Position = _position;
             Name = _name;
@@ -88,7 +84,6 @@ namespace Assets.Scripts
             IsAttacking = false;
             IsDead = false;
             GameUnit = _gameObject;
-            SpawnBuilding = _spawnBuilding;
             count++;
         }
         public override (Unit, float) Closest(List<Unit> units)
