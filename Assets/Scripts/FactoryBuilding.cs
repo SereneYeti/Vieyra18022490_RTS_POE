@@ -44,7 +44,7 @@ namespace Assets.Scripts
         public float resourcesRemaining;
         System.Random r = new System.Random();
         
-        public FactoryBuilding(GameObject _gameUnit, string _name, float _health, float _faction, float _resourcesRemaining)
+        public FactoryBuilding(GameObject _gameUnit, string _name, float _health, float _faction)
         {
             GameUnit = _gameUnit;
             Name = _name;
@@ -52,7 +52,6 @@ namespace Assets.Scripts
             base.maxHealth = _health;
             base.faction = _faction;
             Destroyed = false;
-            resourcesRemaining = _resourcesRemaining;
         }
        
         public void ProduceUnit()
