@@ -27,12 +27,12 @@ namespace Assets.Scripts
         public GameObject Wizard3;
         public GameObject Barrier;
 
-        public GameObject txtWarrior1;
-        public GameObject txtWarrior2;
-        public GameObject txtWizard1;
-        public GameObject txtWizard2;
-        public GameObject txtRanged1;
-        public GameObject txtRanged2;
+        public TextMeshProUGUI txtWarrior1;
+        public TextMeshProUGUI txtWarrior2;
+        public TextMeshProUGUI txtWizard1;
+        public TextMeshProUGUI txtWizard2;
+        public TextMeshProUGUI txtRanged1;
+        public TextMeshProUGUI txtRanged2;
 
         public static System.Random rnd = new System.Random();
         Vector3 Position;
@@ -62,7 +62,7 @@ namespace Assets.Scripts
             DisplayBuildings();
 
         txtWarrior1.text = "HP";
-        ttWarrior2.text = "HP";
+        txtWarrior2.text = "HP";
         txtWizard1.text = "HP";
         txtWizard2.text = "HP";
         txtRanged1.text = "HP";
@@ -349,11 +349,11 @@ namespace Assets.Scripts
                     MeleeUnit mu = (MeleeUnit)u;
                     if(mu.Faction == 0)
                     {
-                        txtWarrior1.text =Convert.ToString(mu.Health) + "HP";
+                        txtWarrior1.text ="Melee Units 1: " + Convert.ToString(mu.Health) + " HP";
                     }
                     if (mu.Faction == 1)
                     {
-                        txtWarrior2.text = Convert.ToString(mu.Health) + "HP";
+                        txtWarrior2.text = "Melee Units 2: " + Convert.ToString(mu.Health) + " HP";
                     }
                     mu.Move(rnd.Next(0, 4));
                     if (mu.Health <= 0)
@@ -367,12 +367,12 @@ namespace Assets.Scripts
                     RangedUnit ru = (RangedUnit)u;
                     if (ru.Faction == 0)
                     {
-                        txtRanged1.text = Convert.ToString(mu.Health) + "HP";
+                        txtRanged1.text = "Ranged Units 1: " + Convert.ToString(ru.Health) + " HP";
                         
                     }
                     if (ru.Faction == 1)
                     {
-                        txtRanged2.text = Convert.ToString(mu.Health) + "HP";
+                        txtRanged2.text = "Ranged Units 2: " + Convert.ToString(ru.Health) + " HP";
                     }
                     ru.Move(rnd.Next(0, 4));
                     if (ru.Health <= 0)
@@ -385,11 +385,11 @@ namespace Assets.Scripts
                     WizardUnit wu = (WizardUnit)u;
                     if (wu.Faction == 0)
                     {
-                        txtWizard1.text = Convert.ToString(mu.Health) + "HP";
+                        txtWizard1.text = "Wizard Unit 1: " + Convert.ToString(wu.Health) + " HP";
                     }
                     if (wu.Faction == 1)
                     {
-                        txtWizard2.text = Convert.ToString(mu.Health) + "HP";
+                        txtWizard2.text = "Wizard Unit 2: " + Convert.ToString(wu.Health) + " HP";
                     }
                     wu.Move(rnd.Next(0, 4));
                     if (wu.Health <= 0)
