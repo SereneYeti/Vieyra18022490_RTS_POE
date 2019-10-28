@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Assets.Scripts
 {
@@ -24,6 +26,13 @@ namespace Assets.Scripts
         public GameObject factoryBuilding2;
         public GameObject Wizard3;
         public GameObject Barrier;
+
+        public GameObject txtWarrior1;
+        public GameObject txtWarrior2;
+        public GameObject txtWizard1;
+        public GameObject txtWizard2;
+        public GameObject txtRanged1;
+        public GameObject txtRanged2;
 
         public static System.Random rnd = new System.Random();
         Vector3 Position;
@@ -51,6 +60,13 @@ namespace Assets.Scripts
             Position.y = 1;
             GenerateBuildings(2, 1);
             DisplayBuildings();
+
+        txtWarrior1.text = "HP";
+        ttWarrior2.text = "HP";
+        txtWizard1.text = "HP";
+        txtWizard2.text = "HP";
+        txtRanged1.text = "HP";
+        txtRanged2.text = "HP";
         }
 
         // Update is called once per frame
@@ -323,38 +339,65 @@ namespace Assets.Scripts
             }
             Display();
 
-            foreach(Unit u in units)
+            
+            foreach (Unit u in units)
             {
-                if(u is MeleeUnit)
+                if (u is MeleeUnit)
                 {
+                    
+                   
                     MeleeUnit mu = (MeleeUnit)u;
-                    if(mu.Health <= 0)
+                    if(mu.Faction == 0)
                     {
-                        Destroy(mu.GameUnit);
+                        txtWarrior1.text =Convert.ToString(mu.Health) + "HP";
+                    }
+                    if (mu.Faction == 1)
+                    {
+                        txtWarrior2.text = Convert.ToString(mu.Health) + "HP";
+                    }
+                    mu.Move(rnd.Next(0, 4));
+                    if (mu.Health <= 0)
+                    {
                         units.Remove(u);
                     }
-                    
+
                 }
-                else if(u is RangedUnit)
+                else if (u is RangedUnit)
                 {
                     RangedUnit ru = (RangedUnit)u;
+                    if (ru.Faction == 0)
+                    {
+                        txtRanged1.text = Convert.ToString(mu.Health) + "HP";
+                        
+                    }
+                    if (ru.Faction == 1)
+                    {
+                        txtRanged2.text = Convert.ToString(mu.Health) + "HP";
+                    }
+                    ru.Move(rnd.Next(0, 4));
                     if (ru.Health <= 0)
                     {
-                        Destroy(ru.GameUnit);
                         units.Remove(u);
                     }
                 }
                 else if (u is WizardUnit)
                 {
                     WizardUnit wu = (WizardUnit)u;
+                    if (wu.Faction == 0)
+                    {
+                        txtWizard1.text = Convert.ToString(mu.Health) + "HP";
+                    }
+                    if (wu.Faction == 1)
+                    {
+                        txtWizard2.text = Convert.ToString(mu.Health) + "HP";
+                    }
+                    wu.Move(rnd.Next(0, 4));
                     if (wu.Health <= 0)
                     {
-                        Destroy(wu.GameUnit);
                         units.Remove(u);
                     }
                 }
-
-            }
+            }    
         }
 
         public void GenerateBuildings(int rB, int fB)

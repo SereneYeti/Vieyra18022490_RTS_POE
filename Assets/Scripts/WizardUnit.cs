@@ -195,13 +195,37 @@ namespace Assets.Scripts
         public override void Move(int dir)
         {   //Handles the movement of the units as unity is being used we can use a vector which keeps track of the movement now and has a x,y & z pos. 
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
-
+            Vector3 temp = new Vector3();
             switch (dir)
             {
-                case 0: GameUnit.transform.Translate(0f, 0f, 1f); break; //North (Swaped)
-                case 1: GameUnit.transform.Translate(1f, 0f, 0f); break; //East
-                case 2: GameUnit.transform.Translate(0f, 0f, -1f); break; //South (Swaped)
-                case 3: GameUnit.transform.Translate(-1f, 0f, 0f); break; //West
+                case 0:
+                    {
+                        temp = GameUnit.transform.position + new Vector3(0f, 0f, 10f);
+                        GameUnit.transform.position = temp;
+                        GameUnit.transform.Translate(Vector3.up * Speed);
+                        break; //North (Swaped)
+                    }
+                case 1:
+                    {
+                        temp = GameUnit.transform.position + new Vector3(10f, 0f, 0f);
+                        GameUnit.transform.position = temp;
+                        GameUnit.transform.Translate(Vector3.right * Speed);
+                        break; //East
+                    }
+                case 2:
+                    {
+                        temp = GameUnit.transform.position + new Vector3(0f, 0f, -10f);
+                        GameUnit.transform.position = temp;
+                        GameUnit.transform.Translate(Vector3.down * Speed);
+                        break; //South (Swaped)
+                    }
+                case 3:
+                    {
+                        temp = GameUnit.transform.position + new Vector3(-10f, 0f, 0f);
+                        GameUnit.transform.position = temp;
+                        GameUnit.transform.Translate(Vector3.left * Speed);
+                        break; //West
+                    }
                 default: break;
             }
         }
