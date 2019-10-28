@@ -59,7 +59,7 @@ namespace Assets.Scripts
             resourcesRemaining = _resourcesRemaing;
             resourcesGenerated = 0;
         }  
-        public (float rR, float rG) GenerateResources()
+        public float GenerateResources()
         {
             if(((resourcesRemaining - resourcesPerRound)>=0f)&&(Destroyed == false))
             {
@@ -68,8 +68,9 @@ namespace Assets.Scripts
             }
             resourceInfo = "Resources Remaining: " + resourcesPerRound + "\nResources per round: " + resourcesGenerated
                 + "\nResources Generated: " + resourcesRemaining;
-            return (resourcesRemaining, resourcesGenerated);
+            return  resourcesGenerated;
         }
+        
         public override void Destruction()
         {
             Destroyed = true;

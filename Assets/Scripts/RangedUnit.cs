@@ -64,7 +64,13 @@ namespace Assets.Scripts
             get { return base.gameUnit; }
             set { base.gameUnit = value; }
         }
-        public RangedUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction)
+        public Building SpawnBuilding
+        {
+            get { return base.spawnBuilding; }
+            set { base.spawnBuilding = value; }
+        }
+        public int count = 0;
+        public RangedUnit(GameObject _gameUnit, string _name, float _health, float _attack, float _attackRange, float _speed, float _faction, Building _spawnBuilding)
         {
             GameUnit = _gameUnit;
             Name = _name;
@@ -76,6 +82,7 @@ namespace Assets.Scripts
             base.faction = _faction;
             IsAttacking = false;
             IsDead = false;
+            count++;
 
         }
         public override (Unit, float) Closest(List<Unit> units)
@@ -194,10 +201,10 @@ namespace Assets.Scripts
             //N.B. using the x and z co-ordinates as it is a 3d program and y is vertical up or down not forward or back.
             switch (dir)
             {
-                case 0: _position.z++; GameUnit.transform.position = _position; break; //North (Swaped)
-                case 1: _position.x++; GameUnit.transform.position = _position; break; //East
-                case 2: _position.z--; GameUnit.transform.position = _position; break; //South (Swaped)
-                case 3: _position.x--; GameUnit.transform.position = _position; break; //West
+                case 0: _position.z++; GameUnit.transform.Translate(_position); break; //North (Swaped)
+                case 1: _position.x++; GameUnit.transform.Translate(_position); break; //East
+                case 2: _position.z--; GameUnit.transform.Translate(_position); break; //South (Swaped)
+                case 3: _position.x--; GameUnit.transform.Translate(_position); break; //West
                 default: break;
             }
         }
