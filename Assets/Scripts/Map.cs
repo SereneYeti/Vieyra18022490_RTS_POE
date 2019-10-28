@@ -29,6 +29,7 @@ namespace Assets.Scripts
         public float meleeCost { get; set; } = 10f;
         public float rangedCost { get; set; } = 10f;
         public float wizardCost { get; set; } = 20f;
+        public float resourcesGenerated { get; set; } = 0f;
 
 
         //public Map(int _numBuildings, int _numUnits, GameObject _Melee, GameObject _Ranged, GameObject _Wizard, GameObject _ResourceBuilding, GameObject _FactoryBuilding)
@@ -59,7 +60,7 @@ namespace Assets.Scripts
                 if(b is ResourceBuilding)
                 {
                     ResourceBuilding rb = (ResourceBuilding)b;
-                    rb.GenerateResources();
+                    resourcesGenerated = rb.GenerateResources();
                 }
             }
             GenerateUnits();            
@@ -133,10 +134,10 @@ namespace Assets.Scripts
             Vector3 pos = new Vector3();
             foreach(Building b in buildings)
             {
-                ResourceBuilding rb = (ResourceBuilding)b;
-                if(((((rb.GenerateResources()-meleeCost)>=0)||(rb.GenerateResources() - rangedCost) >= 0)||(rb.GenerateResources() - wizardCost) >= 0)&&(rnd.Next(0,3)==0)) //Melee
+                if(((((resourcesGenerated - meleeCost)>=0)||(resourcesGenerated - rangedCost) >= 0)||(resourcesGenerated - wizardCost) >= 0)&&(rnd.Next(0,3)==0)) //Melee
                 {
-                    if(rb.Faction == 0)
+                    ResourceBuilding rb = (ResourceBuilding)b;
+                    if (rb.Faction == 0)
                     {
                         foreach(Building b1 in buildings)
                         {
@@ -146,8 +147,8 @@ namespace Assets.Scripts
                                 if(fb.Faction ==0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Melee1.transform.position = pos;
                                     MeleeUnit mu = new MeleeUnit("MeleeUnit1_", 30, 10, 1, 1, 0, Melee1);
                                     mu.Name += mu.count;
@@ -167,8 +168,8 @@ namespace Assets.Scripts
                                 if (fb.Faction == 0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Melee2.transform.position = pos;
                                     MeleeUnit mu = new MeleeUnit("MeleeUnit2_", 30, 10, 1, 1, 1, Melee2);
                                     mu.Name += mu.count;
@@ -180,8 +181,9 @@ namespace Assets.Scripts
                         
                     
                 }
-                else if (((((rb.GenerateResources() - meleeCost) >= 0) || (rb.GenerateResources() - rangedCost) >= 0) || (rb.GenerateResources() - wizardCost) >= 0) && (rnd.Next(0, 3) == 1)) //Ranged
+                else if (((((resourcesGenerated - meleeCost) >= 0) || (resourcesGenerated - rangedCost) >= 0) || (resourcesGenerated - wizardCost) >= 0) && (rnd.Next(0, 3) == 1)) //Ranged
                 {
+                    ResourceBuilding rb = (ResourceBuilding)b;
                     if (rb.Faction == 0)
                     {
                         foreach (Building b1 in buildings)
@@ -192,8 +194,8 @@ namespace Assets.Scripts
                                 if (fb.Faction == 0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Ranged1.transform.position = pos;
                                     RangedUnit ru = new RangedUnit(Ranged1, "RangedUnit1_", 20, 15, 5, 1, 0);
                                     ru.Name += ru.count;
@@ -213,8 +215,8 @@ namespace Assets.Scripts
                                 if (fb.Faction == 0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Ranged2.transform.position = pos;
                                     RangedUnit ru = new RangedUnit(Ranged2, "RangedUnit2_", 20, 15, 5, 1, 1);
                                     ru.Name += ru.count;
@@ -224,8 +226,9 @@ namespace Assets.Scripts
                         }                        
                     }
                 }
-                else if (((((rb.GenerateResources() - meleeCost) >= 0) || (rb.GenerateResources() - rangedCost) >= 0) || (rb.GenerateResources() - wizardCost) >= 0) && (rnd.Next(0, 3) == 2))
+                else if (((((resourcesGenerated - meleeCost) >= 0) || (resourcesGenerated - rangedCost) >= 0) || (resourcesGenerated - wizardCost) >= 0) && (rnd.Next(0, 3) == 2))
                 {
+                    ResourceBuilding rb = (ResourceBuilding)b;
                     if (rb.Faction == 0)
                     {
                         foreach (Building b1 in buildings)
@@ -236,8 +239,8 @@ namespace Assets.Scripts
                                 if (fb.Faction == 0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Wizard1.transform.position = pos;
                                     WizardUnit wu = new WizardUnit(Wizard1, "WizardUnit1_", 20, 10, 5, 1, 0);
                                     wu.Name += wu.count;
@@ -256,8 +259,8 @@ namespace Assets.Scripts
                                 if (fb.Faction == 0)
                                 {
                                     pos = fb.GameUnit.transform.position;
-                                    pos.x++;
-                                    pos.z++;
+                                    pos.x += rnd.Next(-30, 30);
+                                    pos.z += rnd.Next(-30, 30);
                                     Wizard2.transform.position = pos;
                                     WizardUnit wu = new WizardUnit(Wizard2, "WizardUnit2_", 20, 10, 5, 1, 1);
                                     wu.Name += wu.count;
